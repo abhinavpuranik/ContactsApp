@@ -1,6 +1,6 @@
 /*
  * @author Developer
- * @version 4.0
+ * @version 5.0
  * Entrypoint
  */
 
@@ -24,6 +24,12 @@ import com.seveneleven.mycontact.user.model.User;
 import com.seveneleven.mycontact.user.profile.command.ChangePasswordCommand;
 import com.seveneleven.mycontact.user.profile.command.UpdateNameCommand;
 import com.seveneleven.mycontact.user.profile.manager.ProfileManager;
+import java.util.Optional;
+
+import com.seveneleven.mycontact.contact.view.BasicContactView;
+import com.seveneleven.mycontact.contact.view.ContactView;
+import com.seveneleven.mycontact.contact.view.decorator.EmailDisplayDecorator;
+import com.seveneleven.mycontact.contact.view.decorator.PhoneDisplayDecorator;
 
 public class Main {
 
@@ -88,6 +94,25 @@ public class Main {
             contactService.addContact(contact);
 
             System.out.println("Contact Created: " + contact.getName());
+            
+         // UC-05 : View Contact Details
+
+            Optional<Contact> found = contactService.findContactByName("Rohit Sharma");
+
+            if(found.isPresent()) {
+
+                Contact contactToView = found.get();
+
+                ContactView view = new BasicContactView(contactToView);
+
+                view = new PhoneDisplayDecorator(view, contactToView);
+                view = new EmailDisplayDecorator(view, contactToView);
+
+                System.out.println("\n----- Contact Details -----");
+                System.out.println(view.display());
+            }
+            
+            
 
         } else {
             System.out.println("Login Failed!");

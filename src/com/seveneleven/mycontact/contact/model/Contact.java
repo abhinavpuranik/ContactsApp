@@ -32,5 +32,14 @@ public abstract class Contact {
     public String getName() {
         return name;
     }
+    
+    public List<PhoneNumber> getPhoneNumbers() {
+    	return phoneNumbers;
+    }
+
+	public List<EmailAddress> getEmails() {
+		return emails;
+	
+	}
 
 }

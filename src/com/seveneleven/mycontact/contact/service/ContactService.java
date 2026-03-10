@@ -9,6 +9,7 @@ package com.seveneleven.mycontact.contact.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.seveneleven.mycontact.contact.model.Contact;
 
@@ -23,5 +24,12 @@ public class ContactService {
 
     public List<Contact> getAllContacts() {
         return contacts;
+    }
+    
+    public Optional<Contact> findContactByName(String name) {
+
+        return contacts.stream()
+                .filter(c -> c.getName().equalsIgnoreCase(name))
+                .findFirst();
     }
 }

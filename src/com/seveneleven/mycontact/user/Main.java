@@ -12,6 +12,9 @@ package com.seveneleven.mycontact.user;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import com.seveneleven.mycontact.contact.edit.command.CommandHistory;
+import com.seveneleven.mycontact.contact.edit.command.EditContactCommand;
 import com.seveneleven.mycontact.contact.factory.ContactFactory;
 import com.seveneleven.mycontact.contact.model.Contact;
 import com.seveneleven.mycontact.contact.service.ContactService;
@@ -110,6 +113,29 @@ public class Main {
 
                 System.out.println("\n----- Contact Details -----");
                 System.out.println(view.display());
+            }
+         // UC-06 : Edit Contact
+
+            CommandHistory history = new CommandHistory();
+
+            Optional<Contact> contactOpt =
+                    contactService.findContactByName("Rohit Sharma");
+
+            if(contactOpt.isPresent()) {
+
+                Contact contact2 = contactOpt.get();
+
+                EditContactCommand editCommand =
+                        new EditContactCommand(contact2, "Rohit S");
+
+                history.execute(editCommand);
+
+                System.out.println("Updated Contact Name: " + contact2.getName());
+
+                // Undo change
+                history.undo();
+
+                System.out.println("After Undo: " + contact2.getName());
             }
             
             

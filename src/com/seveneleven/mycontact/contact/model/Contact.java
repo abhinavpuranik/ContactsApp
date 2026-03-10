@@ -1,8 +1,18 @@
+
+/*
+ * @author Developer
+ * @version 6.0
+ * 
+ * Contact model
+ */
+
 package com.seveneleven.mycontact.contact.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+
+import com.seveneleven.mycontact.contact.edit.memento.ContactMemento;
 
 public abstract class Contact {
 
@@ -40,6 +50,23 @@ public abstract class Contact {
 	public List<EmailAddress> getEmails() {
 		return emails;
 	
+	}
+	
+	public ContactMemento saveState() {
+	    return new ContactMemento(name, phoneNumbers, emails);
+	}
+	
+	public void restoreState(ContactMemento memento) {
+
+	    this.name = memento.getName();
+	    this.phoneNumbers = memento.getPhones();
+	    this.emails = memento.getEmails();
+	}
+
+	public void setName(String newName) {
+		this.name = newName;
+		
+		
 	}
 
 }

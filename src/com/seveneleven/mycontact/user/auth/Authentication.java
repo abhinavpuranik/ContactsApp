@@ -1,7 +1,7 @@
 /*
  * @author Developer
  * @version 2.0
- * Entrypoint
+ * 
  */
 
 //Authentication strategy interface

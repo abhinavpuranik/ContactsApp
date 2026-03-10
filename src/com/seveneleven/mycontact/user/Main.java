@@ -1,6 +1,6 @@
 /*
  * @author Developer
- * @version 3.0
+ * @version 4.0
  * Entrypoint
  */
 
@@ -12,7 +12,9 @@ package com.seveneleven.mycontact.user;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+import com.seveneleven.mycontact.contact.factory.ContactFactory;
+import com.seveneleven.mycontact.contact.model.Contact;
+import com.seveneleven.mycontact.contact.service.ContactService;
 import com.seveneleven.mycontact.user.auth.Authentication;
 import com.seveneleven.mycontact.user.auth.AuthenticationContext;
 import com.seveneleven.mycontact.user.auth.UserService;
@@ -71,6 +73,21 @@ public class Main {
             );
 
             System.out.println("Updated Name: " + loggedUser.getUserName());
+            
+         // UC-04 : Create Contact
+
+            ContactService contactService = new ContactService();
+
+            Contact contact = ContactFactory.createContact(
+            		"PERSON",
+                    "Rohit Sharma",
+                    List.of("9876543210", "9998887777"),
+                    List.of("rohit@email.com")
+            );
+
+            contactService.addContact(contact);
+
+            System.out.println("Contact Created: " + contact.getName());
 
         } else {
             System.out.println("Login Failed!");

@@ -1,3 +1,9 @@
+/*
+ * @author Developer
+ * @version 2.0
+ * Entrypoint
+ */
+
 //Authentication strategy interface
 
 package com.seveneleven.mycontact.user.auth;

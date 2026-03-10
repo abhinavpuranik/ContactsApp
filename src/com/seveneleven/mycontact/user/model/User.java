@@ -1,3 +1,9 @@
+/*
+ * @author Developer
+ * @version 2.0
+ * 
+ */
+
 //Abstract user model with getters and setters. Encapsulation of user data
 package com.seveneleven.mycontact.user.model;
 
@@ -20,7 +26,7 @@ public abstract class User {
         return emailAddress;
     }
 
-    protected void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
     public String getPassword() {
@@ -29,6 +35,10 @@ public abstract class User {
 
     public String getUserName() {
         return userName;
+    }
+    
+    public void setUserName(String newName) {
+    	this.userName = newName;
     }
     
     protected void setAge(int age) {

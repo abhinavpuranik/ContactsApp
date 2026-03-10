@@ -1,3 +1,9 @@
+/*
+ * @author Developer
+ * @version 2.0
+ * 
+ */
+
 //Factory Pattern to create the user object of the required type
 
 package com.seveneleven.mycontact.user.factory;

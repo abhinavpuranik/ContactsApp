@@ -1,3 +1,9 @@
+/*
+ * @author Developer
+ * @version 2.0
+ * 
+ */
+
 //Password validation to ensure password contains 8 characters of both cases and symbols
 package com.seveneleven.mycontact.user.validation;
 

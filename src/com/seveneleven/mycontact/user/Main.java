@@ -1,3 +1,10 @@
+/*
+ * @author Developer
+ * @version 3.0
+ * Entrypoint
+ */
+
+
 //Main function for first two use cases
 
 package com.seveneleven.mycontact.user;
@@ -12,6 +19,9 @@ import com.seveneleven.mycontact.user.auth.UserService;
 import com.seveneleven.mycontact.user.auth.session.SessionManager;
 import com.seveneleven.mycontact.user.auth.strategy.BasicAuthStrategy;
 import com.seveneleven.mycontact.user.model.User;
+import com.seveneleven.mycontact.user.profile.command.ChangePasswordCommand;
+import com.seveneleven.mycontact.user.profile.command.UpdateNameCommand;
+import com.seveneleven.mycontact.user.profile.manager.ProfileManager;
 
 public class Main {
 
@@ -47,6 +57,20 @@ public class Main {
                     SessionManager.getInstance()
                             .getLoggedInUser()
                             .getUserName());
+            
+            User loggedUser = SessionManager.getInstance().getLoggedInUser();
+
+            ProfileManager manager = new ProfileManager();
+
+            manager.executeCommand(
+                    new UpdateNameCommand(loggedUser, "Abhinav P")
+            );
+
+            manager.executeCommand(
+                    new ChangePasswordCommand(loggedUser, "NewPass@123")
+            );
+
+            System.out.println("Updated Name: " + loggedUser.getUserName());
 
         } else {
             System.out.println("Login Failed!");

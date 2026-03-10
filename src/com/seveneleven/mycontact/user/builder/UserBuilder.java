@@ -1,3 +1,9 @@
+/*
+ * @author Developer
+ * @version 2.0
+ * 
+ */
+
 //Builder Pattern for object creation logic
 package com.seveneleven.mycontact.user.builder;
 import com.seveneleven.mycontact.user.model.User;

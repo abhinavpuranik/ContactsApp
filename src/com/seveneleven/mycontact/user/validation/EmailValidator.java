@@ -1,3 +1,9 @@
+/*
+ * @author Developer
+ * @version 2.0
+ * 
+ */
+
 //Email validation to check if email is in the correct format
 package com.seveneleven.mycontact.user.validation;
 

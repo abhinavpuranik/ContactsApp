@@ -1,3 +1,9 @@
+/*
+ * @author Developer
+ * @version 2.0
+ * 
+ */
+
 package com.seveneleven.mycontact.user.auth.strategy;
 
 import com.seveneleven.mycontact.user.auth.Authentication;

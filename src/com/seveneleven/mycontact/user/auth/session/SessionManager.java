@@ -1,3 +1,9 @@
+/*
+ * @author Developer
+ * @version 2.0
+ * 
+ */
+
 //create and return sessions
 
 package com.seveneleven.mycontact.user.auth.session;

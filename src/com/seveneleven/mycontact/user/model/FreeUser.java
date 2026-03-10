@@ -1,3 +1,9 @@
+
+/*
+ * @author Developer
+ * @version 2.0
+ * 
+ */
 //Free user model
 package com.seveneleven.mycontact.user.model;
 

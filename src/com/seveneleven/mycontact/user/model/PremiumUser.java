@@ -1,3 +1,9 @@
+
+/*
+ * @author Developer
+ * @version 2.0
+ * 
+ */
 //Premium User Model
 package com.seveneleven.mycontact.user.model;
 

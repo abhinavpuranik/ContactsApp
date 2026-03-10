@@ -1,3 +1,8 @@
+/*
+ * @author Developer
+ * @version 2.0
+ * 
+ */
 //Password hasher using sha digestion
 
 package com.seveneleven.mycontact.user.auth;

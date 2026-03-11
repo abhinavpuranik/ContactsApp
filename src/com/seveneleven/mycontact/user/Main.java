@@ -1,11 +1,11 @@
 /*
  * @author Developer
- * @version 5.0
+7 * @version .0
  * Entrypoint
  */
 
 
-//Main function for first two use cases
+//Main function entrypoint
 
 package com.seveneleven.mycontact.user;
 
@@ -33,6 +33,7 @@ import com.seveneleven.mycontact.contact.view.BasicContactView;
 import com.seveneleven.mycontact.contact.view.ContactView;
 import com.seveneleven.mycontact.contact.view.decorator.EmailDisplayDecorator;
 import com.seveneleven.mycontact.contact.view.decorator.PhoneDisplayDecorator;
+import com.seveneleven.mycontact.contact.delete.observer.ContactDeletionLogger;
 
 public class Main {
 
@@ -136,6 +137,21 @@ public class Main {
                 history.undo();
 
                 System.out.println("After Undo: " + contact2.getName());
+            }
+            
+         // UC-07 : Delete Contact
+
+            contactService.addDeletionObserver(new ContactDeletionLogger());
+
+            System.out.println("\nDeleting contact...");
+
+            try {
+
+                contactService.deleteContact("Rohit Sharma");
+
+            } catch (Exception e) {
+
+                System.out.println("Error: " + e.getMessage());
             }
             
             

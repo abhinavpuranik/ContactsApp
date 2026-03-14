@@ -1,6 +1,6 @@
 /*
  * @author Developer
-7 * @version .0
+7 * @version 8.0
  * Entrypoint
  */
 
@@ -27,6 +27,8 @@ import com.seveneleven.mycontact.user.model.User;
 import com.seveneleven.mycontact.user.profile.command.ChangePasswordCommand;
 import com.seveneleven.mycontact.user.profile.command.UpdateNameCommand;
 import com.seveneleven.mycontact.user.profile.manager.ProfileManager;
+import com.seveneleven.mycontact.contact.bulk.ContactGroup;
+import com.seveneleven.mycontact.contact.bulk.SingleContact;
 import java.util.Optional;
 
 import com.seveneleven.mycontact.contact.view.BasicContactView;
@@ -153,7 +155,20 @@ public class Main {
 
                 System.out.println("Error: " + e.getMessage());
             }
+         // UC-08 : Bulk Operations
             
+            ContactGroup bulkGroup = new ContactGroup();
+
+            for(Contact c : contactService.getAllContacts()) {
+
+                bulkGroup.add(new SingleContact(c, contactService));
+            }
+
+            System.out.println("\nPerforming Bulk Export...");
+            bulkGroup.export();
+
+            System.out.println("\nPerforming Bulk Delete...");
+            bulkGroup.delete();
             
 
         } else {

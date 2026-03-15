@@ -22,6 +22,6 @@ public class TagFilter implements ContactFilter {
 
         return contact.getTags()
                 .stream()
-                .anyMatch(t -> t.equalsIgnoreCase(tag));
+                .anyMatch(t -> t.getName().equals(tag));
     }
 }

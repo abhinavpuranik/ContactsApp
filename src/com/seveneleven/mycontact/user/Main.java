@@ -20,6 +20,8 @@ import com.seveneleven.mycontact.contact.model.Contact;
 import com.seveneleven.mycontact.contact.service.ContactService;
 import com.seveneleven.mycontact.contact.tag.Tag;
 import com.seveneleven.mycontact.contact.tag.TagFactory;
+import com.seveneleven.mycontact.contact.tagging.observer.TagChangeLogger;
+import com.seveneleven.mycontact.contact.tagging.service.TaggingService;
 import com.seveneleven.mycontact.user.auth.Authentication;
 import com.seveneleven.mycontact.user.auth.AuthenticationContext;
 import com.seveneleven.mycontact.user.auth.UserService;
@@ -261,6 +263,35 @@ public class Main {
 
             System.out.println("\nContact with Tags:");
             System.out.println(taggedContact.getName() + " -> " + taggedContact.getTags());
+            
+         // UC-12 : Apply Tags to Contacts
+
+            TaggingService taggingService = new TaggingService();
+
+            // Observer
+            taggingService.addObserver(new TagChangeLogger());
+            
+            Tag workTag2 = TagFactory.getTag("work");
+            Tag friendTag = TagFactory.getTag("friends");
+
+            
+            Contact taggedContact2 = ContactFactory.createContact(
+                    "PERSON",
+                    "Virat Kohli",
+                    List.of("9988776655"),
+                    List.of("virat@email.com")
+            );
+
+            contactService.addContact(taggedContact2);
+
+
+            taggingService.addTagToContact(taggedContact2, workTag2);
+            taggingService.addTagToContact(taggedContact2, friendTag);
+
+           
+            taggingService.removeTagFromContact(taggedContact2, friendTag);
+
+            System.out.println("Tags now: " + taggedContact.getTags());
             
 
         } else {

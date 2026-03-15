@@ -9,6 +9,7 @@
 package com.seveneleven.mycontact.contact.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,6 +22,7 @@ public abstract class Contact {
 
     protected List<PhoneNumber> phoneNumbers;
     protected List<EmailAddress> emails;
+    private List<String> tags = new ArrayList<>();
 
     protected LocalDateTime createdAt;
 
@@ -68,5 +70,24 @@ public abstract class Contact {
 		
 		
 	}
+	public List<String> getTags() {
+	    return List.copyOf(tags);
+	}
 
+	public void addTag(String tag) {
+	    tags.add(tag.toLowerCase());
+	}
+	public void removeTag(String tag) {
+	    tags.remove(tag.toLowerCase());
+	}
+	@Override
+	public String toString() {
+
+	    return "Contact{" +
+	            "name='" + name + '\'' +
+	            ", phones=" + phoneNumbers +
+	            ", emails=" + emails +
+	            ", tags=" + tags +
+	            '}';
+	}
 }

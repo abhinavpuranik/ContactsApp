@@ -31,6 +31,10 @@ import com.seveneleven.mycontact.contact.bulk.ContactGroup;
 import com.seveneleven.mycontact.contact.bulk.SingleContact;
 import java.util.Optional;
 
+import com.seveneleven.mycontact.contact.search.chain.FilterHandler;
+import com.seveneleven.mycontact.contact.search.chain.SearchPipeline;
+import com.seveneleven.mycontact.contact.search.specification.NameCriteria;
+import com.seveneleven.mycontact.contact.search.specification.EmailCriteria;
 import com.seveneleven.mycontact.contact.view.BasicContactView;
 import com.seveneleven.mycontact.contact.view.ContactView;
 import com.seveneleven.mycontact.contact.view.decorator.EmailDisplayDecorator;
@@ -169,6 +173,27 @@ public class Main {
 
             System.out.println("\nPerforming Bulk Delete...");
             bulkGroup.delete();
+         // UC-09 : Search Contacts
+
+            SearchPipeline pipeline = new SearchPipeline();
+
+            FilterHandler nameFilter =
+                    new FilterHandler(new NameCriteria("Rohit"));
+
+            FilterHandler emailFilter =
+                    new FilterHandler(new EmailCriteria("email"));
+
+            nameFilter.setNext(emailFilter);
+
+            pipeline.addFilter(nameFilter);
+
+            List<Contact> results =
+                    pipeline.execute(contactService.getAllContacts());
+
+            System.out.println("\nSearch Results:");
+
+            results.forEach(c ->
+                    System.out.println("Found: " + c.getName()));
             
 
         } else {

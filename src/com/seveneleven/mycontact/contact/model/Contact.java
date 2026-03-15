@@ -10,10 +10,13 @@ package com.seveneleven.mycontact.contact.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import com.seveneleven.mycontact.contact.edit.memento.ContactMemento;
+import com.seveneleven.mycontact.contact.tag.Tag;
 
 public abstract class Contact {
 
@@ -23,8 +26,7 @@ public abstract class Contact {
 
     protected List<PhoneNumber> phoneNumbers;
     protected List<EmailAddress> emails;
-    private List<String> tags = new ArrayList<>();
-
+    private Set<Tag> tags = new HashSet<>();
     protected LocalDateTime createdAt;
 
     public Contact(String name,
@@ -76,15 +78,14 @@ public abstract class Contact {
 		
 		
 	}
-	public List<String> getTags() {
-	    return List.copyOf(tags);
+	public Set<Tag> getTags() {
+	    return Set.copyOf(tags);
 	}
-
-	public void addTag(String tag) {
-	    tags.add(tag.toLowerCase());
+	public void addTag(Tag tag) {
+	    tags.add(tag);
 	}
-	public void removeTag(String tag) {
-	    tags.remove(tag.toLowerCase());
+	public void removeTag(Tag tag) {
+	    tags.remove(tag);
 	}
 	@Override
 	public String toString() {

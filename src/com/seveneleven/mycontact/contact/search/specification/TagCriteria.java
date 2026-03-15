@@ -1,10 +1,10 @@
+
 /*
  * @author Developer
- * @version 9.0
+ * @version 11.0
  * 
  * 
  */
-
 package com.seveneleven.mycontact.contact.search.specification;
 
 import com.seveneleven.mycontact.contact.model.Contact;
@@ -25,6 +25,8 @@ public class TagCriteria implements SearchCriteria {
 
         return contact.getTags()
                 .stream()
-                .anyMatch(t -> t.toLowerCase().contains(tag));
+                .anyMatch(t -> t.getName()
+                                .toLowerCase()
+                                .contains(tag));
     }
 }

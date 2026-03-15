@@ -18,6 +18,8 @@ import com.seveneleven.mycontact.contact.edit.command.EditContactCommand;
 import com.seveneleven.mycontact.contact.factory.ContactFactory;
 import com.seveneleven.mycontact.contact.model.Contact;
 import com.seveneleven.mycontact.contact.service.ContactService;
+import com.seveneleven.mycontact.contact.tag.Tag;
+import com.seveneleven.mycontact.contact.tag.TagFactory;
 import com.seveneleven.mycontact.user.auth.Authentication;
 import com.seveneleven.mycontact.user.auth.AuthenticationContext;
 import com.seveneleven.mycontact.user.auth.UserService;
@@ -213,7 +215,7 @@ public class Main {
             );
 
            
-            filterContact.addTag("work");
+            filterContact.addTag(new Tag("work"));
             
             
             filterContact.incrementContactCount();
@@ -239,6 +241,26 @@ public class Main {
 
             filteredContacts.forEach(c ->
                     System.out.println(c.getName()));
+            
+         // UC-11 : Create and Manage Tags
+
+            Tag workTag = TagFactory.getTag("work");
+            Tag familyTag = TagFactory.getTag("family");
+
+            Contact taggedContact = ContactFactory.createContact(
+                    "PERSON",
+                    "Rahul Dravid",
+                    List.of("9876500000"),
+                    List.of("rahul@email.com")
+            );
+
+            taggedContact.addTag(workTag);
+            taggedContact.addTag(familyTag);
+
+            contactService.addContact(taggedContact);
+
+            System.out.println("\nContact with Tags:");
+            System.out.println(taggedContact.getName() + " -> " + taggedContact.getTags());
             
 
         } else {

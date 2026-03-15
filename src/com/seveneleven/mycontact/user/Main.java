@@ -29,6 +29,13 @@ import com.seveneleven.mycontact.user.profile.command.UpdateNameCommand;
 import com.seveneleven.mycontact.user.profile.manager.ProfileManager;
 import com.seveneleven.mycontact.contact.bulk.ContactGroup;
 import com.seveneleven.mycontact.contact.bulk.SingleContact;
+import java.time.LocalDateTime;
+
+import com.seveneleven.mycontact.contact.filter.CompositeFilter;
+import com.seveneleven.mycontact.contact.filter.TagFilter;
+import com.seveneleven.mycontact.contact.filter.DateAddedFilter;
+import com.seveneleven.mycontact.contact.filter.FrequentContactFilter;
+import com.seveneleven.mycontact.contact.filter.strategy.NameSortStrategy;
 import java.util.Optional;
 
 import com.seveneleven.mycontact.contact.search.chain.FilterHandler;
@@ -194,6 +201,44 @@ public class Main {
 
             results.forEach(c ->
                     System.out.println("Found: " + c.getName()));
+            
+         // UC-10 : Advanced Filtering
+         // Creating a contact that satisfies test filters
+
+            Contact filterContact = ContactFactory.createContact(
+                    "PERSON",
+                    "Test Work Contact",
+                    List.of("9123456789"),
+                    List.of("workperson@email.com")
+            );
+
+           
+            filterContact.addTag("work");
+            
+            
+            filterContact.incrementContactCount();
+            filterContact.incrementContactCount();
+
+            // Adding contact to the service
+            contactService.addContact(filterContact);
+
+            CompositeFilter compositeFilter = new CompositeFilter();
+
+            compositeFilter.addFilter(new TagFilter("work"));
+            compositeFilter.addFilter(new DateAddedFilter(LocalDateTime.now().minusDays(30)));
+            compositeFilter.addFilter(new FrequentContactFilter(2));
+
+            List<Contact> filteredContacts =
+                    contactService.getAllContacts()
+                    .stream()
+                    .filter(compositeFilter::apply)
+                    .sorted(new NameSortStrategy().getComparator())
+                    .toList();
+
+            System.out.println("\nAdvanced Filter Results:");
+
+            filteredContacts.forEach(c ->
+                    System.out.println(c.getName()));
             
 
         } else {

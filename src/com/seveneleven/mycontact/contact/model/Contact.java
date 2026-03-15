@@ -19,6 +19,7 @@ public abstract class Contact {
 
     protected UUID id;
     protected String name;
+    private int contactCount = 5;
 
     protected List<PhoneNumber> phoneNumbers;
     protected List<EmailAddress> emails;
@@ -37,6 +38,9 @@ public abstract class Contact {
         this.createdAt = LocalDateTime.now();
     }
 
+    public LocalDateTime getCreatedAt() {
+    	return createdAt;
+    }
     public UUID getId() {
         return id;
     }
@@ -66,7 +70,9 @@ public abstract class Contact {
 	}
 
 	public void setName(String newName) {
-		this.name = newName;
+		this.name = newName; {
+			
+		}
 		
 		
 	}
@@ -89,5 +95,13 @@ public abstract class Contact {
 	            ", emails=" + emails +
 	            ", tags=" + tags +
 	            '}';
+	}
+
+	public void incrementContactCount() {
+	    contactCount++;
+	}
+
+	public int getContactCount() {
+	    return contactCount;
 	}
 }
